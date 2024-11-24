@@ -9,7 +9,7 @@ import Foundation
 
 fileprivate enum DateFormatConstants {
     static let serverSideInputFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-    static let clientSideOutputFormat = "dd MM yyyy"
+    static let clientSideOutputFormat = "dd-MM-yyyy"
 }
 
 final class DateHelper {

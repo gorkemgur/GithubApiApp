@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EECCFF732CF33192001689CE /* GithubApiAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFF722CF33192001689CE /* GithubApiAppApp.swift */; };
-		EECCFF752CF33192001689CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFF742CF33192001689CE /* ContentView.swift */; };
 		EECCFF772CF33193001689CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EECCFF762CF33193001689CE /* Assets.xcassets */; };
 		EECCFF7A2CF33193001689CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EECCFF792CF33193001689CE /* Preview Assets.xcassets */; };
 		EECCFF842CF33194001689CE /* GithubApiAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFF832CF33194001689CE /* GithubApiAppTests.swift */; };
@@ -25,6 +24,16 @@
 		EECCFFBD2CF3482C001689CE /* PreviewNetworManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFBC2CF3482C001689CE /* PreviewNetworManager.swift */; };
 		EECCFFBF2CF34834001689CE /* PreviewLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFBE2CF34834001689CE /* PreviewLocalStorageManager.swift */; };
 		EECCFFC12CF3483A001689CE /* PreviewNetworkMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFC02CF3483A001689CE /* PreviewNetworkMonitoring.swift */; };
+		EECCFFC62CF34BB7001689CE /* UserSearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFC52CF34BB7001689CE /* UserSearchListView.swift */; };
+		EECCFFCB2CF34BCB001689CE /* UserSearchEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFCA2CF34BCB001689CE /* UserSearchEndpoint.swift */; };
+		EECCFFCD2CF34C36001689CE /* UserSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFCC2CF34C36001689CE /* UserSearchModel.swift */; };
+		EECCFFCF2CF34C3E001689CE /* UserSearchDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFCE2CF34C3E001689CE /* UserSearchDatabaseModel.swift */; };
+		EECCFFD22CF352EC001689CE /* LocalStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD12CF352EC001689CE /* LocalStorageError.swift */; };
+		EECCFFD42CF353FC001689CE /* UserSearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD32CF353FC001689CE /* UserSearchListViewModel.swift */; };
+		EECCFFD62CF356E4001689CE /* StorageFetchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD52CF356E4001689CE /* StorageFetchOptions.swift */; };
+		EECCFFD92CF35EEC001689CE /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD82CF35EEC001689CE /* UserRow.swift */; };
+		EECCFFDC2CF38826001689CE /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFDB2CF38826001689CE /* NetworkStatusView.swift */; };
+		EECCFFE02CF39092001689CE /* ViewStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFDF2CF39092001689CE /* ViewStateEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +49,6 @@
 /* Begin PBXFileReference section */
 		EECCFF6F2CF33192001689CE /* GithubApiApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubApiApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EECCFF722CF33192001689CE /* GithubApiAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubApiAppApp.swift; sourceTree = "<group>"; };
-		EECCFF742CF33192001689CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EECCFF762CF33193001689CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EECCFF792CF33193001689CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EECCFF7F2CF33193001689CE /* GithubApiAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubApiAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +65,16 @@
 		EECCFFBC2CF3482C001689CE /* PreviewNetworManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewNetworManager.swift; sourceTree = "<group>"; };
 		EECCFFBE2CF34834001689CE /* PreviewLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLocalStorageManager.swift; sourceTree = "<group>"; };
 		EECCFFC02CF3483A001689CE /* PreviewNetworkMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewNetworkMonitoring.swift; sourceTree = "<group>"; };
+		EECCFFC52CF34BB7001689CE /* UserSearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchListView.swift; sourceTree = "<group>"; };
+		EECCFFCA2CF34BCB001689CE /* UserSearchEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchEndpoint.swift; sourceTree = "<group>"; };
+		EECCFFCC2CF34C36001689CE /* UserSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchModel.swift; sourceTree = "<group>"; };
+		EECCFFCE2CF34C3E001689CE /* UserSearchDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchDatabaseModel.swift; sourceTree = "<group>"; };
+		EECCFFD12CF352EC001689CE /* LocalStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageError.swift; sourceTree = "<group>"; };
+		EECCFFD32CF353FC001689CE /* UserSearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchListViewModel.swift; sourceTree = "<group>"; };
+		EECCFFD52CF356E4001689CE /* StorageFetchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFetchOptions.swift; sourceTree = "<group>"; };
+		EECCFFD82CF35EEC001689CE /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
+		EECCFFDB2CF38826001689CE /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
+		EECCFFDF2CF39092001689CE /* ViewStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,13 +118,14 @@
 		EECCFF712CF33192001689CE /* GithubApiApp */ = {
 			isa = PBXGroup;
 			children = (
+				EECCFFD72CF35EE5001689CE /* Components */,
+				EECCFFC22CF34BA0001689CE /* Modules */,
 				EECCFFB42CF33EDC001689CE /* App */,
 				EECCFFA82CF33A29001689CE /* Extension */,
 				EECCFFA72CF33A25001689CE /* Helpers */,
 				EECCFFA62CF33A22001689CE /* Managers */,
 				EECCFF9C2CF331C2001689CE /* Resources */,
 				EECCFF722CF33192001689CE /* GithubApiAppApp.swift */,
-				EECCFF742CF33192001689CE /* ContentView.swift */,
 			);
 			path = GithubApiApp;
 			sourceTree = "<group>";
@@ -150,8 +169,8 @@
 		EECCFFA62CF33A22001689CE /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				EECCFFD02CF352E0001689CE /* LocalStorageManager */,
 				EECCFFAD2CF33B47001689CE /* NetworkManager */,
-				EECCFFBA2CF3451C001689CE /* LocalStorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -190,6 +209,86 @@
 				EECCFFB72CF344B0001689CE /* AppConfig.xcconfig */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		EECCFFC22CF34BA0001689CE /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFC42CF34BAB001689CE /* RepositoryList */,
+				EECCFFC32CF34BA7001689CE /* UserSearch */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		EECCFFC32CF34BA7001689CE /* UserSearch */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFC92CF34BC3001689CE /* Models */,
+				EECCFFC82CF34BBF001689CE /* ViewModel */,
+				EECCFFC72CF34BBC001689CE /* Views */,
+			);
+			path = UserSearch;
+			sourceTree = "<group>";
+		};
+		EECCFFC42CF34BAB001689CE /* RepositoryList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RepositoryList;
+			sourceTree = "<group>";
+		};
+		EECCFFC72CF34BBC001689CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFD82CF35EEC001689CE /* UserRow.swift */,
+				EECCFFC52CF34BB7001689CE /* UserSearchListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EECCFFC82CF34BBF001689CE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFD32CF353FC001689CE /* UserSearchListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EECCFFC92CF34BC3001689CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFCA2CF34BCB001689CE /* UserSearchEndpoint.swift */,
+				EECCFFCC2CF34C36001689CE /* UserSearchModel.swift */,
+				EECCFFCE2CF34C3E001689CE /* UserSearchDatabaseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EECCFFD02CF352E0001689CE /* LocalStorageManager */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFBA2CF3451C001689CE /* LocalStorageManager.swift */,
+				EECCFFD12CF352EC001689CE /* LocalStorageError.swift */,
+				EECCFFD52CF356E4001689CE /* StorageFetchOptions.swift */,
+			);
+			path = LocalStorageManager;
+			sourceTree = "<group>";
+		};
+		EECCFFD72CF35EE5001689CE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFDA2CF38810001689CE /* NetworkStatusView */,
+				EECCFFDF2CF39092001689CE /* ViewStateEnum.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		EECCFFDA2CF38810001689CE /* NetworkStatusView */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFDB2CF38826001689CE /* NetworkStatusView.swift */,
+			);
+			path = NetworkStatusView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,13 +401,22 @@
 			files = (
 				EECCFFC12CF3483A001689CE /* PreviewNetworkMonitoring.swift in Sources */,
 				EECCFFBF2CF34834001689CE /* PreviewLocalStorageManager.swift in Sources */,
+				EECCFFD22CF352EC001689CE /* LocalStorageError.swift in Sources */,
+				EECCFFE02CF39092001689CE /* ViewStateEnum.swift in Sources */,
+				EECCFFD92CF35EEC001689CE /* UserRow.swift in Sources */,
 				EECCFFB62CF33EE3001689CE /* AppConfiguration.swift in Sources */,
-				EECCFF752CF33192001689CE /* ContentView.swift in Sources */,
+				EECCFFC62CF34BB7001689CE /* UserSearchListView.swift in Sources */,
 				EECCFFAA2CF33A32001689CE /* DateHelper.swift in Sources */,
+				EECCFFCD2CF34C36001689CE /* UserSearchModel.swift in Sources */,
 				EECCFFB32CF33B97001689CE /* Endpoint.swift in Sources */,
+				EECCFFCB2CF34BCB001689CE /* UserSearchEndpoint.swift in Sources */,
 				EECCFF9F2CF339E5001689CE /* DependencyContainer.swift in Sources */,
 				EECCFFB12CF33B92001689CE /* NetworkManager.swift in Sources */,
+				EECCFFDC2CF38826001689CE /* NetworkStatusView.swift in Sources */,
+				EECCFFCF2CF34C3E001689CE /* UserSearchDatabaseModel.swift in Sources */,
 				EECCFFBD2CF3482C001689CE /* PreviewNetworManager.swift in Sources */,
+				EECCFFD42CF353FC001689CE /* UserSearchListViewModel.swift in Sources */,
+				EECCFFD62CF356E4001689CE /* StorageFetchOptions.swift in Sources */,
 				EECCFFAF2CF33B8A001689CE /* NetworkError.swift in Sources */,
 				EECCFFBB2CF3451C001689CE /* LocalStorageManager.swift in Sources */,
 				EECCFFAC2CF33B0C001689CE /* String+Extension.swift in Sources */,
@@ -456,10 +564,12 @@
 		};
 		EECCFF942CF33194001689CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EECCFFB72CF344B0001689CE /* AppConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GithubApiApp/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -487,10 +597,12 @@
 		};
 		EECCFF952CF33194001689CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EECCFFB72CF344B0001689CE /* AppConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GithubApiApp/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = "";

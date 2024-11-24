@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct GithubApiAppApp: App {
+    private let container: DependencyContainer
+    
+    init() {
+        self.container = DependencyContainer()
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            UserSearchListView(container: container)
         }
     }
 }

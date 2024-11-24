@@ -1,0 +1,12 @@
+//
+//  AppConfig.xcconfig
+//  GithubApiApp
+//
+//  Created by Görkem Gür on 24.11.2024.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+BASE_URL = api.github.com

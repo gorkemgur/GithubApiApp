@@ -14,7 +14,7 @@ enum NetworkError: LocalizedError {
     case rateLimitExceeded
     case decodeFailed(errorDescription: String)
     
-    var errorDescription: String? {
+    var errorDescription: String {
         switch self {
         case .invalidURL:
             "Invalıd URL Error Check Your URL"

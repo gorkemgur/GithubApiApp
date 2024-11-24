@@ -41,6 +41,10 @@ extension Endpoint {
         ]
     }
     
+    var queryParameters: [String : String]? {
+        nil
+    }
+    
     func createURLRequest() -> URLRequest? {
         var urlComponents = URLComponents()
         urlComponents.scheme = scheme

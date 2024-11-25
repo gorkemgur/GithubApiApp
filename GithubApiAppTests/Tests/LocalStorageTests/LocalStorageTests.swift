@@ -28,7 +28,7 @@ final class LocalStorageTests: XCTestCase {
     
     func testSaveUserSuccess() {
         //Given
-        let mockUser = UserSearchModel.testUser
+        let mockUser = UserSearchTestModel.testUser
         var storageError: LocalStorageError?
         
         //When
@@ -44,7 +44,7 @@ final class LocalStorageTests: XCTestCase {
     
     func testFetchUserSuccess() {
         //Given
-        let mockUser = UserSearchModel.testUser
+        let mockUser = UserSearchTestModel.testUser
         let expectation = XCTestExpectation(description: "Test User Fetch")
         var fetchedUser: UserSearchModel?
         try? sut.saveUser(mockUser)
@@ -64,7 +64,7 @@ final class LocalStorageTests: XCTestCase {
     
     func testFetchUserFailed() {
         //Given
-        let mockUser = UserSearchModel.testUser
+        let mockUser = UserSearchTestModel.testUser
         let expectation = XCTestExpectation(description: "Failed Fetch User")
         var fetchUserError: LocalStorageError?
         try? sut.saveUser(mockUser)
@@ -84,8 +84,8 @@ final class LocalStorageTests: XCTestCase {
     
     func testSaveRepositoriesSuccess() {
         //Given
-        let mockUser = UserSearchModel.testUser
-        let mockRepositories = RepositoryModel.testRepositories
+        let mockUser = UserSearchTestModel.testUser
+        let mockRepositories = RepositoryTestModel.testRepositories
         try? sut.saveUser(mockUser)
         var storageError: LocalStorageError?
        
@@ -102,8 +102,8 @@ final class LocalStorageTests: XCTestCase {
     
     func testFetchRepositoriesSuccess() {
         //Given
-        let mockUser = UserSearchModel.testUser
-        let mockRepositories = RepositoryModel.testRepositories
+        let mockUser = UserSearchTestModel.testUser
+        let mockRepositories = RepositoryTestModel.testRepositories
         var fetchedRepositories: [RepositoryModel]?
         var fetchRepositoryError: LocalStorageError?
         let expectation = XCTestExpectation(description: "Repositores Should Be Fetched")
@@ -133,47 +133,5 @@ final class LocalStorageTests: XCTestCase {
         XCTAssertNotNil(fetchedRepositories)
         XCTAssertEqual(fetchedRepositories?.count, mockRepositories.count)
         XCTAssertTrue(fetchedRepositories?.first?.owner?.login == mockUser.login, "Repositores Should Be In RelationShip With Parent(Owner)")
-    }
-}
-
-
-fileprivate extension UserSearchModel {
-    static var testUser: UserSearchModel {
-        .init(
-            id: 1,
-            login: "TestUser",
-            name: "Test User",
-            avatarURL: "",
-            followersCount: 10,
-            followingCount: 10,
-            repositoryCount: 5)
-    }
-}
-
-fileprivate extension RepositoryModel {
-    static var testRepositories: [RepositoryModel] {
-        var list: [RepositoryModel] = []
-        for i in 0...5 {
-            list.append(
-                RepositoryModel(
-                    id: i,
-                    owner: RepositoryOwnerModel.testModel,
-                    repositoryDescription: "Test Description",
-                    repositoryName: "Test Repository Name",
-                    repositoryURL: "",
-                    isForked: false,
-                    createdDate: "25.11.2024")
-            )
-        }
-        return list
-    }
-}
-
-fileprivate extension RepositoryOwnerModel {
-    static var testModel: RepositoryOwnerModel {
-        .init(
-            id: 1,
-            login: "TestUser",
-            avatarURL: "")
     }
 }

@@ -10,8 +10,6 @@ import SwiftUI
 struct UserRow: View {
     private let user: UserSearchModel
     
-    var didUserImageFetched: ((Data) -> Void)?
-    
     init(user: UserSearchModel) {
         self.user = user
     }

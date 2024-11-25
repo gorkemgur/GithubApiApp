@@ -21,7 +21,7 @@ final class UserSearchListViewModel: ObservableObject {
     @Published var userSearchQueryText = ""
     @Published private(set) var viewState: ViewState = .idle
     @Published private(set) var userModel: UserSearchModel? = nil
-    @Published private(set) var isNetworkConnectionAvailable = false {
+    @Published private(set) var isNetworkConnectionAvailable: Bool = false {
         didSet {
             if hasPendingSearchRequest && !userSearchQueryText.isEmpty {
                 searchUser()
@@ -39,7 +39,6 @@ final class UserSearchListViewModel: ObservableObject {
             self.cancellables = Set<AnyCancellable>()
             setupObservers()
         }
-    
     
     private func cancelCurrentTask() {
         currentTask?.cancel()
@@ -67,34 +66,42 @@ extension UserSearchListViewModel {
                     self.hasPendingSearchRequest = false
                     return
                 }
-                if self.isNetworkConnectionAvailable {
-                    self.searchUser()
-                } else {
-                    hasPendingSearchRequest = true
-                    loadUserFromLocalStorage()
-                }
+                self.performSearch()
             }.store(in: &cancellables)
         
         networkMonitoringService
             .currentConnectionStatus
             .receive(on: DispatchQueue.main)
+            .removeDuplicates()
             .sink { [weak self] hasNetworkConnection in
-                print(hasNetworkConnection)
-                self?.isNetworkConnectionAvailable = hasNetworkConnection
+                guard let self = self else { return }
+                if self.isNetworkConnectionAvailable != hasNetworkConnection {
+                    self.isNetworkConnectionAvailable = hasNetworkConnection
+                }
             }.store(in: &cancellables)
         
         storageService
-            .userListPublisher
+            .userModelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] userSearchModel in
                 guard let self = self else { return }
                 self.userModel = userSearchModel
+                self.viewState = .hideLoading
             }.store(in: &cancellables)
+    }
+    
+    private func performSearch() {
+        if self.isNetworkConnectionAvailable {
+            self.searchUser()
+        } else {
+            hasPendingSearchRequest = true
+            loadUserFromLocalStorage()
+        }
     }
 }
 
 
-//MARK: - Nework Request
+//MARK: - Network Request
 extension UserSearchListViewModel {
     private func searchUser() {
         cancelCurrentTask()
@@ -123,18 +130,30 @@ extension UserSearchListViewModel {
 //MARK: - Local Storage Functions
 extension UserSearchListViewModel {
     private func saveUserToLocaStorage(userModel: UserSearchModel) {
+        print(Thread.isMainThread)
         do {
             try storageService.saveUser(userModel)
             loadUserFromLocalStorage()
         } catch {
             if let storageError = error as? LocalStorageError {
                 self.viewState = .showEmptyView
+                self.userModel = nil
                 print(storageError.errorDescription)
             }
         }
     }
     
     private func loadUserFromLocalStorage() {
-        storageService.fetchUser(with: .user(userName: userSearchQueryText))
+        print(Thread.isMainThread)
+        do {
+            self.viewState = .showLoading
+            try storageService.fetchUser(with: .user(userName: userSearchQueryText))
+        } catch {
+            if let storageError = error as? LocalStorageError {
+                self.userModel = nil
+                self.viewState = .showEmptyView
+                print(storageError.errorDescription)
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE9FFA112CF49E760059F1A8 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = EECCFFA42CF33A19001689CE /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		EECCFF732CF33192001689CE /* GithubApiAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFF722CF33192001689CE /* GithubApiAppApp.swift */; };
 		EECCFF772CF33193001689CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EECCFF762CF33193001689CE /* Assets.xcassets */; };
 		EECCFF7A2CF33193001689CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EECCFF792CF33193001689CE /* Preview Assets.xcassets */; };
@@ -30,10 +31,16 @@
 		EECCFFCF2CF34C3E001689CE /* UserSearchDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFCE2CF34C3E001689CE /* UserSearchDatabaseModel.swift */; };
 		EECCFFD22CF352EC001689CE /* LocalStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD12CF352EC001689CE /* LocalStorageError.swift */; };
 		EECCFFD42CF353FC001689CE /* UserSearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD32CF353FC001689CE /* UserSearchListViewModel.swift */; };
-		EECCFFD62CF356E4001689CE /* StorageFetchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD52CF356E4001689CE /* StorageFetchOptions.swift */; };
+		EECCFFD62CF356E4001689CE /* StorageFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD52CF356E4001689CE /* StorageFilterOptions.swift */; };
 		EECCFFD92CF35EEC001689CE /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFD82CF35EEC001689CE /* UserRow.swift */; };
 		EECCFFDC2CF38826001689CE /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFDB2CF38826001689CE /* NetworkStatusView.swift */; };
 		EECCFFE02CF39092001689CE /* ViewStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFDF2CF39092001689CE /* ViewStateEnum.swift */; };
+		EECCFFE52CF3956E001689CE /* RepositoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFE42CF3956E001689CE /* RepositoryRow.swift */; };
+		EECCFFE72CF39577001689CE /* RepositoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFE62CF39577001689CE /* RepositoryListView.swift */; };
+		EECCFFE92CF39581001689CE /* RepositoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFE82CF39581001689CE /* RepositoryListViewModel.swift */; };
+		EECCFFEB2CF3B8CF001689CE /* RepositoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFEA2CF3B8CF001689CE /* RepositoryModel.swift */; };
+		EECCFFED2CF3BAB6001689CE /* RepositoryDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFEC2CF3BAB6001689CE /* RepositoryDatabaseModel.swift */; };
+		EECCFFEF2CF3C966001689CE /* RepositoriesSearchEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECCFFEE2CF3C966001689CE /* RepositoriesSearchEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +52,20 @@
 			remoteInfo = GithubApiApp;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EE9FFA122CF49E760059F1A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EE9FFA112CF49E760059F1A8 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EECCFF6F2CF33192001689CE /* GithubApiApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubApiApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,10 +92,16 @@
 		EECCFFCE2CF34C3E001689CE /* UserSearchDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchDatabaseModel.swift; sourceTree = "<group>"; };
 		EECCFFD12CF352EC001689CE /* LocalStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageError.swift; sourceTree = "<group>"; };
 		EECCFFD32CF353FC001689CE /* UserSearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchListViewModel.swift; sourceTree = "<group>"; };
-		EECCFFD52CF356E4001689CE /* StorageFetchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFetchOptions.swift; sourceTree = "<group>"; };
+		EECCFFD52CF356E4001689CE /* StorageFilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFilterOptions.swift; sourceTree = "<group>"; };
 		EECCFFD82CF35EEC001689CE /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		EECCFFDB2CF38826001689CE /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
 		EECCFFDF2CF39092001689CE /* ViewStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStateEnum.swift; sourceTree = "<group>"; };
+		EECCFFE42CF3956E001689CE /* RepositoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRow.swift; sourceTree = "<group>"; };
+		EECCFFE62CF39577001689CE /* RepositoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListView.swift; sourceTree = "<group>"; };
+		EECCFFE82CF39581001689CE /* RepositoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListViewModel.swift; sourceTree = "<group>"; };
+		EECCFFEA2CF3B8CF001689CE /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
+		EECCFFEC2CF3BAB6001689CE /* RepositoryDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDatabaseModel.swift; sourceTree = "<group>"; };
+		EECCFFEE2CF3C966001689CE /* RepositoriesSearchEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesSearchEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +260,9 @@
 		EECCFFC42CF34BAB001689CE /* RepositoryList */ = {
 			isa = PBXGroup;
 			children = (
+				EECCFFE32CF39565001689CE /* Views */,
+				EECCFFE22CF39560001689CE /* ViewModel */,
+				EECCFFE12CF3955D001689CE /* Models */,
 			);
 			path = RepositoryList;
 			sourceTree = "<group>";
@@ -269,7 +299,7 @@
 			children = (
 				EECCFFBA2CF3451C001689CE /* LocalStorageManager.swift */,
 				EECCFFD12CF352EC001689CE /* LocalStorageError.swift */,
-				EECCFFD52CF356E4001689CE /* StorageFetchOptions.swift */,
+				EECCFFD52CF356E4001689CE /* StorageFilterOptions.swift */,
 			);
 			path = LocalStorageManager;
 			sourceTree = "<group>";
@@ -291,6 +321,33 @@
 			path = NetworkStatusView;
 			sourceTree = "<group>";
 		};
+		EECCFFE12CF3955D001689CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFEA2CF3B8CF001689CE /* RepositoryModel.swift */,
+				EECCFFEC2CF3BAB6001689CE /* RepositoryDatabaseModel.swift */,
+				EECCFFEE2CF3C966001689CE /* RepositoriesSearchEndpoint.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EECCFFE22CF39560001689CE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFE82CF39581001689CE /* RepositoryListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EECCFFE32CF39565001689CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EECCFFE42CF3956E001689CE /* RepositoryRow.swift */,
+				EECCFFE62CF39577001689CE /* RepositoryListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,6 +358,7 @@
 				EECCFF6B2CF33192001689CE /* Sources */,
 				EECCFF6C2CF33192001689CE /* Frameworks */,
 				EECCFF6D2CF33192001689CE /* Resources */,
+				EE9FFA122CF49E760059F1A8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -401,10 +459,13 @@
 			files = (
 				EECCFFC12CF3483A001689CE /* PreviewNetworkMonitoring.swift in Sources */,
 				EECCFFBF2CF34834001689CE /* PreviewLocalStorageManager.swift in Sources */,
+				EECCFFED2CF3BAB6001689CE /* RepositoryDatabaseModel.swift in Sources */,
+				EECCFFE52CF3956E001689CE /* RepositoryRow.swift in Sources */,
 				EECCFFD22CF352EC001689CE /* LocalStorageError.swift in Sources */,
 				EECCFFE02CF39092001689CE /* ViewStateEnum.swift in Sources */,
 				EECCFFD92CF35EEC001689CE /* UserRow.swift in Sources */,
 				EECCFFB62CF33EE3001689CE /* AppConfiguration.swift in Sources */,
+				EECCFFE92CF39581001689CE /* RepositoryListViewModel.swift in Sources */,
 				EECCFFC62CF34BB7001689CE /* UserSearchListView.swift in Sources */,
 				EECCFFAA2CF33A32001689CE /* DateHelper.swift in Sources */,
 				EECCFFCD2CF34C36001689CE /* UserSearchModel.swift in Sources */,
@@ -416,9 +477,12 @@
 				EECCFFCF2CF34C3E001689CE /* UserSearchDatabaseModel.swift in Sources */,
 				EECCFFBD2CF3482C001689CE /* PreviewNetworManager.swift in Sources */,
 				EECCFFD42CF353FC001689CE /* UserSearchListViewModel.swift in Sources */,
-				EECCFFD62CF356E4001689CE /* StorageFetchOptions.swift in Sources */,
+				EECCFFE72CF39577001689CE /* RepositoryListView.swift in Sources */,
+				EECCFFD62CF356E4001689CE /* StorageFilterOptions.swift in Sources */,
 				EECCFFAF2CF33B8A001689CE /* NetworkError.swift in Sources */,
 				EECCFFBB2CF3451C001689CE /* LocalStorageManager.swift in Sources */,
+				EECCFFEF2CF3C966001689CE /* RepositoriesSearchEndpoint.swift in Sources */,
+				EECCFFEB2CF3B8CF001689CE /* RepositoryModel.swift in Sources */,
 				EECCFFAC2CF33B0C001689CE /* String+Extension.swift in Sources */,
 				EECCFF732CF33192001689CE /* GithubApiAppApp.swift in Sources */,
 			);
@@ -569,7 +633,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GithubApiApp/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -602,7 +666,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GithubApiApp/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = "";

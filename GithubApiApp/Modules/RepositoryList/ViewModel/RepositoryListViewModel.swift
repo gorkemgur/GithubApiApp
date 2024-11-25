@@ -30,8 +30,6 @@ final class RepositoryListViewModel: ObservableObject {
     @Published private(set) var repositories: [RepositoryModel] = []
     @Published private(set) var isNetworkConnectionAvailable: Bool = false {
         didSet {
-            
-                print("CHANGE NETWORK STATUS REPO")
             handleNetworkStatusChange()
         }
     }

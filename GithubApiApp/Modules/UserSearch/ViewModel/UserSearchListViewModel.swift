@@ -21,7 +21,7 @@ final class UserSearchListViewModel: ObservableObject {
     @Published var userSearchQueryText = ""
     @Published private(set) var viewState: ViewState = .idle
     @Published private(set) var userModel: UserSearchModel? = nil
-    @Published private(set) var isNetworkConnectionAvailable = false {
+    @Published private(set) var isNetworkConnectionAvailable: Bool = false {
         didSet {
             if hasPendingSearchRequest && !userSearchQueryText.isEmpty {
                 searchUser()
@@ -72,8 +72,12 @@ extension UserSearchListViewModel {
         networkMonitoringService
             .currentConnectionStatus
             .receive(on: DispatchQueue.main)
+            .removeDuplicates()
             .sink { [weak self] hasNetworkConnection in
-                self?.isNetworkConnectionAvailable = hasNetworkConnection
+                guard let self = self else { return }
+                if self.isNetworkConnectionAvailable != hasNetworkConnection {
+                    self.isNetworkConnectionAvailable = hasNetworkConnection
+                }
             }.store(in: &cancellables)
         
         storageService
@@ -82,6 +86,7 @@ extension UserSearchListViewModel {
             .sink { [weak self] userSearchModel in
                 guard let self = self else { return }
                 self.userModel = userSearchModel
+                self.viewState = .hideLoading
             }.store(in: &cancellables)
     }
     
@@ -125,22 +130,27 @@ extension UserSearchListViewModel {
 //MARK: - Local Storage Functions
 extension UserSearchListViewModel {
     private func saveUserToLocaStorage(userModel: UserSearchModel) {
+        print(Thread.isMainThread)
         do {
             try storageService.saveUser(userModel)
             loadUserFromLocalStorage()
         } catch {
             if let storageError = error as? LocalStorageError {
                 self.viewState = .showEmptyView
+                self.userModel = nil
                 print(storageError.errorDescription)
             }
         }
     }
     
     private func loadUserFromLocalStorage() {
+        print(Thread.isMainThread)
         do {
+            self.viewState = .showLoading
             try storageService.fetchUser(with: .user(userName: userSearchQueryText))
         } catch {
             if let storageError = error as? LocalStorageError {
+                self.userModel = nil
                 self.viewState = .showEmptyView
                 print(storageError.errorDescription)
             }

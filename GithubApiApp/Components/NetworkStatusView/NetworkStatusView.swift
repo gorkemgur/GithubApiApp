@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct NetworkStatusView: View {
-    @State var hasNetworkConnection: Bool
+    private let hasNetworkConnection: Bool
+    
+    init(hasNetworkConnection: Bool) {
+        self.hasNetworkConnection = hasNetworkConnection
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
@@ -20,10 +25,10 @@ struct NetworkStatusView: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(hasNetworkConnection ? Color.green : Color.red)
                 }
-        }.animation(.easeInOut)
+        }.transition(.scale)
     }
 }
 
 #Preview {
-    NetworkStatusView(hasNetworkConnection: true)
+    NetworkStatusView(hasNetworkConnection: false)
 }

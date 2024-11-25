@@ -61,7 +61,6 @@ final class LocalStorageManager: LocalStorageService {
             try realm.write {
                 let user = UserSearchDatabaseModel(from: userModel)
                 realm.add(user, update: .modified)
-                userModelSubject.send(userModel)
             }
         } catch {
             throw LocalStorageError.saveError(error)
@@ -86,7 +85,6 @@ final class LocalStorageManager: LocalStorageService {
                 realm.add(repositoriesDatabaseModel, update: .modified)
                 
                 repositoryOwner.repositories.append(objectsIn: repositoriesDatabaseModel)
-                repositoryListSubject.send(repositories)
             }
             
         } catch {
@@ -99,7 +97,7 @@ final class LocalStorageManager: LocalStorageService {
             throw LocalStorageError.userNotFoundError
         }
         
-        let sortedRepositoryList = repositoryOwner.repositories.sorted(byKeyPath: "isForked", ascending: false)
+        let sortedRepositoryList = repositoryOwner.repositories.sorted(byKeyPath: "isForked", ascending: true)
         
         let repositoriesModelList = Array(sortedRepositoryList.compactMap { repositoryDatabaseModel in
             return repositoryDatabaseModel.convertToRepositoryModel()

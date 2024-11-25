@@ -9,9 +9,11 @@ import SwiftUI
 
 struct RepositoryRow: View {
     private let repositoryModel: RepositoryModel
+    private var gridColumnType: GridColumnType
     
-    init(repositoryModel: RepositoryModel) {
+    init(repositoryModel: RepositoryModel, gridColumnType: GridColumnType) {
         self.repositoryModel = repositoryModel
+        self.gridColumnType = gridColumnType
     }
     
     var body: some View {
@@ -26,15 +28,13 @@ struct RepositoryRow: View {
     
     private var contentView: some View {
         VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                userImageView
-                VStack(alignment: .leading, spacing: 10) {
-                    repositoryStatView(title: "Repository Name", description: repositoryModel.repositoryName)
-                    repositoryStatView(title: "Repository Description", description: repositoryModel.repositoryDescription)
-                    repositoryUrlView
-                }
-                Spacer()
-                repositoryOwnerView
+            switch gridColumnType {
+            case .oneViewInRow:
+                oneViewInRow
+            case .twoViewsInRow:
+                twoViewsInRow
+            case .threeViewsInRow:
+                threeViewsInRow
             }
         }
         .padding()
@@ -44,10 +44,41 @@ struct RepositoryRow: View {
         }.padding(10)
     }
     
+    private var oneViewInRow: some View {
+        HStack(alignment: .top) {
+            userImageView
+            VStack(alignment: .leading, spacing: 10) {
+                repositoryStatView(title: "Repository Name", description: repositoryModel.repositoryName)
+                repositoryStatView(title: "Repository Description", description: repositoryModel.repositoryDescription)
+                repositoryUrlView
+            }
+            Spacer()
+            repositoryOwnerView
+        }
+    }
+    
+    private var twoViewsInRow: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            repositoryStatView(title: "Repository Name", description: repositoryModel.repositoryName)
+            repositoryStatView(title: "Repository Description", description: repositoryModel.repositoryDescription)
+            repositoryUrlView
+        }
+    }
+    
+    private var threeViewsInRow: some View {
+        VStack(alignment: .leading) {
+            Text(repositoryModel.repositoryName)
+                .font(.system(size: 14)).bold()
+                .lineLimit(2)
+           showRepositoryInWebButton
+        }
+    }
+    
     private var repositoryOwnerView: some View {
         HStack {
             Text(repositoryModel.isForked ? "Forked" : "Owner")
                 .font(.system(size: 14)).bold()
+                .lineLimit(2)
             Circle()
                 .foregroundStyle(repositoryModel.isForked ? .red : .green)
                 .frame(width: 12, height: 12)
@@ -59,22 +90,26 @@ struct RepositoryRow: View {
             Text("Repository URL")
                 .font(.system(size: 14)).bold()
             HStack {
-                Button(action: {
-                    if let repositoryURL = URL(string: repositoryModel.repositoryURL),
-                       UIApplication.shared.canOpenURL(repositoryURL) {
-                        UIApplication.shared.open(repositoryURL)
-                    }
-                }, label: {
-                    HStack {
-                        Image(systemName: "safari.fill")
-                            .frame(width: 10, height: 10)
-                        Text("Show Repository In Safari")                
-                            .font(.system(size: 12))
-                    }.padding(.horizontal, 2)
-                })
+                showRepositoryInWebButton
                 Spacer()
             }
         }
+    }
+    
+    private var showRepositoryInWebButton: some View {
+        Button(action: {
+            if let repositoryURL = URL(string: repositoryModel.repositoryURL),
+               UIApplication.shared.canOpenURL(repositoryURL) {
+                UIApplication.shared.open(repositoryURL)
+            }
+        }, label: {
+            HStack {
+                Image(systemName: "safari.fill")
+                    .frame(width: 10, height: 10)
+                Text(gridColumnType != .threeViewsInRow ? "Show Repository In Safari" : "Open Safari")
+                    .font(.system(size: 12))
+            }.padding(.horizontal, 2)
+        })
     }
     
     @ViewBuilder
@@ -106,5 +141,5 @@ struct RepositoryRow: View {
 }
 
 #Preview {
-    RepositoryRow(repositoryModel: RepositoryModel.mockData)
+    RepositoryRow(repositoryModel: RepositoryModel.mockData, gridColumnType: .oneViewInRow)
 }

@@ -21,30 +21,26 @@ final class RepositoryListViewModel: ObservableObject {
     
     private var cancellables: Set<AnyCancellable>
     private var currentTask: Task<Void, Never>?
-    private var hasPendingRequest = false
+    private var hasPendingRequest: Bool = false
     private var currentPage = 1
+    private var pendingPage = 0
     private var totalRepositories = 0
     
     @Published private(set) var viewState: ViewState = .idle
     @Published private(set) var repositories: [RepositoryModel] = []
-    @Published private(set) var isNetworkConnectionAvailable = false {
+    @Published private(set) var isNetworkConnectionAvailable: Bool = false {
         didSet {
-            if hasPendingRequest {
-                if currentPage != 1 {
-                    loadNextPage()
-                } else {
-                    fetchRepositories()
-                }
-            }
+            
+                print("CHANGE NETWORK STATUS REPO")
+            handleNetworkStatusChange()
         }
     }
-    @Published var errorMessage: String = ""
     
     init(
         networkService: NetworkService,
         storageService: LocalStorageService,
         networkMonitoringService: NetworkMonitorService,
-        repositoryOwnerModel: UserSearchModel ) {
+        repositoryOwnerModel: UserSearchModel) {
             self.networkService = networkService
             self.storageService = storageService
             self.networkMonitoringService = networkMonitoringService
@@ -52,7 +48,23 @@ final class RepositoryListViewModel: ObservableObject {
             self.cancellables = Set<AnyCancellable>()
             self.totalRepositories = repositoryOwnerModel.repositoryCount
             setupObservers()
+            setupInitialState()
         }
+    
+    private func setupInitialState() {
+        handleNetworkStatusChange()
+    }
+    
+    private func handleNetworkStatusChange() {
+        if isNetworkConnectionAvailable && hasPendingRequest {
+            if pendingPage != 0 && pendingPage > currentPage {
+                currentPage = pendingPage
+            }
+            fetchRepositories()
+        } else {
+            loadRepositoriesFromStorage()
+        }
+    }
     
     
     private func cancelCurrentTask() {
@@ -74,7 +86,11 @@ extension RepositoryListViewModel {
             .currentConnectionStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] hasNetworkConnection in
-                self?.isNetworkConnectionAvailable = hasNetworkConnection
+                guard let self = self else { return }
+                if self.isNetworkConnectionAvailable != hasNetworkConnection {
+                    self.isNetworkConnectionAvailable = hasNetworkConnection
+                }
+                
             }.store(in: &cancellables)
         
         storageService
@@ -88,15 +104,20 @@ extension RepositoryListViewModel {
     }
     
     private func handleNewRepositories(newRepositories: [RepositoryModel]) {
-        if repositories.isEmpty {
-            repositories = newRepositories
+        if newRepositories.isEmpty {
+            hasPendingRequest = true
         } else {
-            newRepositories.forEach { repository in
-                if !repositories.contains(where: { $0.id == repository.id}) {
-                    repositories.append(repository)
+            if repositories.isEmpty {
+                repositories = newRepositories
+            } else {
+                newRepositories.forEach { repository in
+                    if !repositories.contains(where: { $0.id == repository.id}) {
+                        repositories.append(repository)
+                    }
                 }
             }
         }
+        
     }
 }
 
@@ -119,11 +140,11 @@ extension RepositoryListViewModel {
             try storageService.fetchRepositories(with: .repositories(ownerId: repositoryOwnerModel.id))
         } catch {
             if let storageError = error as? LocalStorageError {
+                if case .repositoryNotFoundError = storageError {
+                    hasPendingRequest = true
+                }
                 self.viewState = .showEmptyView
                 print(storageError.errorDescription)
-                if case .repositoryNotFoundError = storageError {
-                    errorMessage = storageError.errorDescription
-                }
             }
         }
     }
@@ -131,16 +152,6 @@ extension RepositoryListViewModel {
 
 //MARK: - Nework Request
 extension RepositoryListViewModel {
-    
-    func getRepositories() {
-        #warning("NetworkMonitor Should Be Refactor First Value Always Come False, it's not good solution")
-        if isNetworkConnectionAvailable {
-            fetchRepositories()
-        } else {
-            loadRepositoriesFromStorage()
-        }
-    }
-    
     private func fetchRepositories() {
         cancelCurrentTask()
         currentTask = Task { @MainActor [weak self] in
@@ -151,6 +162,7 @@ extension RepositoryListViewModel {
                 defer {
                     self.viewState = .hideLoading
                     self.hasPendingRequest = false
+                    self.pendingPage = currentPage
                 }
                 let searchRepositoryEndpoint = RepositoriesSearchEndpoint.getRepositories(userName: repositoryOwnerModel.login, page: currentPage, perPage: PaginationConstants.perPage)
                 let repositoriesModel = try await networkService.performRequest([RepositoryModel].self, with: searchRepositoryEndpoint)
@@ -172,12 +184,14 @@ extension RepositoryListViewModel {
             return
         }
         
-        currentPage += 1
+        let nextPage = currentPage + 1
         
         if isNetworkConnectionAvailable {
+            currentPage = nextPage
             fetchRepositories()
         } else {
             hasPendingRequest = true
+            pendingPage = nextPage
         }
     }
 }

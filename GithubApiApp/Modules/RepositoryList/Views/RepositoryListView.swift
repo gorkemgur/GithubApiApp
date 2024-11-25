@@ -13,7 +13,7 @@ struct RepositoryListView: View {
     @Environment(\.dismiss) private var dismiss
     
     private var gridLayout: [GridItem] {
-        let gridItem = GridItem(.flexible(minimum: 70), spacing: 5)
+        let gridItem = GridItem(.flexible(), spacing: 5)
         return Array(repeating: gridItem, count: gridColumnType.rawValue)
     }
     
@@ -64,19 +64,7 @@ struct RepositoryListView: View {
                     }
                 }
             }
-        }.onAppear {
-            viewModel.getRepositories()
-        }.alert(NSLocalizedString(
-            "Repository Not Found",
-            comment: viewModel.errorMessage), 
-                isPresented: .init(
-                    get: { !viewModel.errorMessage.isEmpty },
-                    set: { if !$0 { viewModel.errorMessage = "" }}
-                )) {
-                    Button("Ok", role: .cancel) {
-                        dismiss()
-                    }
-                }
+        }
     }
     
     private var loadingView: some View {
@@ -101,11 +89,9 @@ struct RepositoryListView: View {
             LazyVGrid(columns: gridLayout) {
                 ForEach(viewModel.repositories.indices, id: \.self) { index in
                     let repositoryModel = viewModel.repositories[index]
-                    RepositoryRow(repositoryModel: repositoryModel)
+                    RepositoryRow(repositoryModel: repositoryModel, gridColumnType: gridColumnType)
                         .onAppear {
-                            print("ONAPPEAR \(index)")
                             if index > viewModel.repositories.count - 2 {
-                                print("shouldLoad \(index)")
                                 viewModel.loadNextPage()
                             }
                         }
@@ -119,7 +105,7 @@ struct RepositoryListView: View {
     RepositoryListView(userModel: UserSearchModel.mockUser, container: DependencyContainer.createContainerForPreview())
 }
 
-fileprivate enum GridColumnType: Int {
+enum GridColumnType: Int {
     case oneViewInRow = 1
     case twoViewsInRow = 2
     case threeViewsInRow = 3

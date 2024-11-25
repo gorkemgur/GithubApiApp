@@ -29,6 +29,7 @@ final class UserSearchDatabaseModel: Object {
         self.name = userModel.name
         self.location = userModel.location
         self.avatarURL = userModel.avatarURL
+        self.email = userModel.email
         self.accountCreatedAt = userModel.accountCreatedAt
         self.followersCount = userModel.followersCount
         self.followingCount = userModel.followingCount
@@ -43,11 +44,13 @@ extension UserSearchDatabaseModel {
             id: id,
             login: login,
             name: name,
-            location: login,
+            location: location,
             avatarURL: avatarURL,
+            email: email,
             accountCreatedAt: accountCreatedAt,
             followersCount: followersCount,
             followingCount: followingCount,
-            repositoryCount: repositoryCount)
+            repositoryCount: repositoryCount,
+            company: company)
     }
 }

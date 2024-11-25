@@ -40,7 +40,6 @@ final class UserSearchListViewModel: ObservableObject {
             setupObservers()
         }
     
-    
     private func cancelCurrentTask() {
         currentTask?.cancel()
         currentTask = nil
@@ -67,34 +66,37 @@ extension UserSearchListViewModel {
                     self.hasPendingSearchRequest = false
                     return
                 }
-                if self.isNetworkConnectionAvailable {
-                    self.searchUser()
-                } else {
-                    hasPendingSearchRequest = true
-                    loadUserFromLocalStorage()
-                }
+                self.performSearch()
             }.store(in: &cancellables)
         
         networkMonitoringService
             .currentConnectionStatus
             .receive(on: DispatchQueue.main)
             .sink { [weak self] hasNetworkConnection in
-                print(hasNetworkConnection)
                 self?.isNetworkConnectionAvailable = hasNetworkConnection
             }.store(in: &cancellables)
         
         storageService
-            .userListPublisher
+            .userModelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] userSearchModel in
                 guard let self = self else { return }
                 self.userModel = userSearchModel
             }.store(in: &cancellables)
     }
+    
+    private func performSearch() {
+        if self.isNetworkConnectionAvailable {
+            self.searchUser()
+        } else {
+            hasPendingSearchRequest = true
+            loadUserFromLocalStorage()
+        }
+    }
 }
 
 
-//MARK: - Nework Request
+//MARK: - Network Request
 extension UserSearchListViewModel {
     private func searchUser() {
         cancelCurrentTask()
@@ -135,6 +137,13 @@ extension UserSearchListViewModel {
     }
     
     private func loadUserFromLocalStorage() {
-        storageService.fetchUser(with: .user(userName: userSearchQueryText))
+        do {
+            try storageService.fetchUser(with: .user(userName: userSearchQueryText))
+        } catch {
+            if let storageError = error as? LocalStorageError {
+                self.viewState = .showEmptyView
+                print(storageError.errorDescription)
+            }
+        }
     }
 }

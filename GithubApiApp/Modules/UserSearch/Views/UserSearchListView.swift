@@ -10,8 +10,12 @@ import SwiftUI
 struct UserSearchListView: View {
     @StateObject private var viewModel: UserSearchListViewModel
     @State var showNetworkStatus = false
+    @State private var isPresented = false
+    
+    private let container: DependencyContainer
     
     init(container: DependencyContainer) {
+        self.container = container
         _viewModel = StateObject(
             wrappedValue: UserSearchListViewModel(
                 networkService: container.networkService,
@@ -27,7 +31,7 @@ struct UserSearchListView: View {
                 
                 switch viewModel.viewState {
                 case .showLoading:
-                    loadingView()
+                    loadingView
                 case .showEmptyView:
                     emptyView
                 case .hideLoading, .idle:
@@ -38,15 +42,23 @@ struct UserSearchListView: View {
                     NetworkStatusView(hasNetworkConnection: viewModel.isNetworkConnectionAvailable)
                 }
             }
+            .navigationTitle("User Search")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle("User Search")
-        .navigationBarTitleDisplayMode(.inline)
+        
         .onChange(of: viewModel.isNetworkConnectionAvailable) { _ in
             showNetworkStatus = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 withAnimation {
                     showNetworkStatus = false
                 }
+            }
+        }.sheet(isPresented: $isPresented) {
+            if let userModel = viewModel.userModel {
+                RepositoryListView(
+                    userModel: userModel,
+                    container: container
+                )
             }
         }
     }
@@ -55,6 +67,9 @@ struct UserSearchListView: View {
     private var contentView: some View {
         if let user = viewModel.userModel {
             UserRow(user: user)
+                .onTapGesture {
+                    isPresented = true
+                }
         } else {
             emptyView
         }
@@ -67,7 +82,7 @@ struct UserSearchListView: View {
         }
     }
     
-    private func loadingView() -> some View {
+    private var loadingView: some View {
         ZStack {
             Color.black.opacity(0.6)
                 .ignoresSafeArea()

@@ -20,6 +20,7 @@ final class UserSearchDatabaseModel: Object {
     @Persisted var followingCount: Int
     @Persisted var repositoryCount: Int
     @Persisted var company: String?
+    @Persisted var repositories: List<RepositoryDatabaseModel>
     
     convenience init(from userModel: UserSearchModel) {
         self.init()

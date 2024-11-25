@@ -44,8 +44,14 @@ struct UserSearchListView: View {
             }
             .navigationTitle("User Search")
             .navigationBarTitleDisplayMode(.inline)
+        }.onAppear {
+            showNetworkStatus = !viewModel.isNetworkConnectionAvailable
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                withAnimation {
+                    showNetworkStatus = !showNetworkStatus
+                }
+            }
         }
-        
         .onChange(of: viewModel.isNetworkConnectionAvailable) { _ in
             showNetworkStatus = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

@@ -97,8 +97,6 @@ In order for the application to work efficiently, it would be appropriate to per
   - Enhanced testing capabilities
 
 - **Network Module**
-  - Standalone network layer
-  - Reusable API client
   - Better error handling
   - Enhanced monitoring capabilities
 
@@ -113,26 +111,18 @@ In order for the application to work efficiently, it would be appropriate to per
 ### 2. Image Caching
 - Implementation of efficient image caching system
 - Memory and disk cache management
-- Cache size optimization
-- Background image prefetching
 
 ### 3. Logging System
 - **Error Logging**
   - Comprehensive error tracking
-  - Stack trace capture
   - Error categorization
-  - Error reporting system
 
 - **Network Logging**
   - Request/Response logging
-  - Performance metrics
   - Network error tracking
-  - API usage analytics
 
 ### 4. iPad Support
 - Adaptive layouts for different screen sizes
-- Split view implementation
-- Master-detail interface
 - Optimized UI for tablet experience
 
 ## Requirements

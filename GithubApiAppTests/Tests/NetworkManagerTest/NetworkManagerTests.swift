@@ -13,11 +13,11 @@ final class NetworkManagerTests: XCTestCase {
     var sut: NetworkService!
     
     override func setUp() {
+        super.setUp()
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLSession.self]
         let urlSession = URLSession.init(configuration: configuration)
         sut = NetworkManager(urlSession: urlSession)
-        super.setUp()
     }
     
     override func tearDown() {
@@ -29,7 +29,6 @@ final class NetworkManagerTests: XCTestCase {
         let sampleFileUrl = Bundle(for: NetworkManagerTests.self).url(forResource: fileName, withExtension: "json")
         return try? Data(contentsOf: sampleFileUrl!)
     }
-    
     
     func testFetchUserDataSuccess() async {
         //Given
@@ -43,8 +42,8 @@ final class NetworkManagerTests: XCTestCase {
             let response = HTTPURLResponse(url: mockURL!, statusCode: 200, httpVersion: nil, headerFields: ["Accept-Type": "application/json"])
             return (response, userJsonSampleData)
         }
-        //When
         
+        //When
         do {
             fetchedUser = try await sut.performRequest(UserSearchModel.self, with: userEndpoint)
         } catch {
@@ -71,8 +70,8 @@ final class NetworkManagerTests: XCTestCase {
             let response = HTTPURLResponse(url: mockURL!, statusCode: 200, httpVersion: nil, headerFields: ["Accept-Type": "application/json"])
             return (response, userJsonSampleData)
         }
-        //When
         
+        //When
         do {
             fetchedUser = try await sut.performRequest(UserSearchModel.self, with: userEndpoint)
         } catch {
@@ -99,8 +98,8 @@ final class NetworkManagerTests: XCTestCase {
             let response = HTTPURLResponse(url: mockURL!, statusCode: 200, httpVersion: nil, headerFields: ["Accept-Type": "application/json"])
             return (response, repositoriesJsonSampleData)
         }
-        //When
         
+        //When
         do {
             fetchedRepositories = try await sut.performRequest([RepositoryModel].self, with: repositoryEndpoint)
         } catch {

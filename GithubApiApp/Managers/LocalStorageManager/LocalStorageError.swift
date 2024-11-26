@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum LocalStorageError: LocalizedError {
-    case saveError(Error)
+enum LocalStorageError: LocalizedError, Equatable {
+    case saveError(String)
     case fetchError
     case userNotFoundError
     case repositoryNotFoundError
     
     var errorDescription: String {
         switch self {
-        case .saveError(let error):
-            return "Error Ocurred With Saving Data \(error.localizedDescription)"
+        case .saveError(let errorDescription):
+            return "Error Ocurred With Saving Data \(errorDescription)"
         case .fetchError:
             return "Error Ocurred With Fetching Data"
         case .userNotFoundError:

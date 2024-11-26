@@ -15,9 +15,9 @@ final class LocalStorageTests: XCTestCase {
     var cancellables: Set<AnyCancellable>!
     
     override func setUp() {
+        super.setUp()
         sut = LocalStorageManager(configuration: Realm.Configuration(inMemoryIdentifier: "test-local-storage"))
         cancellables = Set<AnyCancellable>()
-        super.setUp()
     }
     
     override func tearDown() {

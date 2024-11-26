@@ -63,7 +63,7 @@ final class LocalStorageManager: LocalStorageService {
                 realm.add(user, update: .modified)
             }
         } catch {
-            throw LocalStorageError.saveError(error)
+            throw LocalStorageError.saveError(error.localizedDescription)
         }
     }
     
@@ -88,7 +88,7 @@ final class LocalStorageManager: LocalStorageService {
             }
             
         } catch {
-            throw LocalStorageError.saveError(error)
+            throw LocalStorageError.saveError(error.localizedDescription)
         }
     }
     
